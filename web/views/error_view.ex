@@ -1,12 +1,12 @@
-defmodule Fibbage.ErrorView do
-  use Fibbage.Web, :view
+defmodule MultiChat.ErrorView do
+  use MultiChat.Web, :view
 
   def render("404.html", _assigns) do
     "Page not found"
   end
 
   def render("500.html", _assigns) do
-    "Internal server error"
+    "Server internal error"
   end
 
   # In case no render clause matches or no

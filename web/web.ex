@@ -1,12 +1,12 @@
-defmodule Fibbage.Web do
+defmodule MultiChat.Web do
   @moduledoc """
   A module that keeps using definitions for controllers,
   views and so on.
 
   This can be used in your application as:
 
-      use Fibbage.Web, :controller
-      use Fibbage.Web, :view
+      use MultiChat.Web, :controller
+      use MultiChat.Web, :view
 
   The definitions below will be executed for every view,
   controller, etc, so keep them short and clean, focused
@@ -18,7 +18,7 @@ defmodule Fibbage.Web do
 
   def model do
     quote do
-      # Define common model functionality
+      use Ecto.Model
     end
   end
 
@@ -26,8 +26,9 @@ defmodule Fibbage.Web do
     quote do
       use Phoenix.Controller
 
-      import Fibbage.Router.Helpers
-      import Fibbage.Gettext
+      # Alias the data repository and import query/model functions
+      # Import URL helpers from the router
+      import MultiChat.Router.Helpers
     end
   end
 
@@ -38,12 +39,11 @@ defmodule Fibbage.Web do
       # Import convenience functions from controllers
       import Phoenix.Controller, only: [get_csrf_token: 0, get_flash: 2, view_module: 1]
 
+      # Import URL helpers from the router
+      import MultiChat.Router.Helpers
+
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
-
-      import Fibbage.Router.Helpers
-      import Fibbage.ErrorHelpers
-      import Fibbage.Gettext
     end
   end
 
@@ -56,7 +56,6 @@ defmodule Fibbage.Web do
   def channel do
     quote do
       use Phoenix.Channel
-      import Fibbage.Gettext
     end
   end
 

@@ -6,11 +6,11 @@
 use Mix.Config
 
 # Configures the endpoint
-config :fibbage, Fibbage.Endpoint,
-  url: [host: "localhost"],
-  secret_key_base: "nNNtIHaDqaa8+hqTf8ttaJEDrLb5OeKBFltp0lWlThw6N05nm2QUl5LaRNIj7NxV",
-  render_errors: [view: Fibbage.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: Fibbage.PubSub,
+config :channel_chats, MultiChat.Endpoint,
+  url: [host: "104.236.25.229"],
+  secret_key_base: "BYw+IxRXslbnkOu0trof9QpETpfdsP9CUOhMA2eVr37/WGd2VVgUad1FIG2KQK6K",
+  render_errors: [accepts: "html"],
+  pubsub: [name: MultiChat.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
 # Configures Elixir's Logger
@@ -18,6 +18,14 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
+# config :channel_chats, MultiChat.Presence,
+#   pubsub_server: MultiChat.PubSub
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"
+
+# This line was automatically added by ansible-elixir-stack setup script
+if System.get_env("SERVER") do
+  config :phoenix, :serve_endpoints, true
+end

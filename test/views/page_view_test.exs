@@ -1,3 +1,3 @@
-defmodule Fibbage.PageViewTest do
-  use Fibbage.ConnCase, async: true
+defmodule MultiChat.PageViewTest do
+  use MultiChat.ConnCase, async: true
 end

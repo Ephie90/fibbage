@@ -1,10 +1,10 @@
-defmodule Fibbage.ChannelCase do
+defmodule MultiChat.ChannelCase do
   @moduledoc """
   This module defines the test case to be used by
   channel tests.
 
   Such tests rely on `Phoenix.ChannelTest` and also
-  import other functionality to make it easier
+  imports other functionality to make it easier
   to build and query models.
 
   Finally, if the test case interacts with the database,
@@ -20,13 +20,21 @@ defmodule Fibbage.ChannelCase do
       # Import conveniences for testing with channels
       use Phoenix.ChannelTest
 
+      # Alias the data repository and import query/model functions
+      alias MultiChat.Repo
+      import Ecto.Model
+      import Ecto.Query, only: [from: 2]
+
 
       # The default endpoint for testing
-      @endpoint Fibbage.Endpoint
+      @endpoint MultiChat.Endpoint
     end
   end
 
   setup tags do
+    unless tags[:async] do
+      Ecto.Adapters.SQL.restart_test_transaction(MultiChat.Repo, [])
+    end
 
     :ok
   end

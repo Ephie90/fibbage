@@ -1,10 +1,10 @@
-defmodule Fibbage.ConnCase do
+defmodule MultiChat.ConnCase do
   @moduledoc """
   This module defines the test case to be used by
   tests that require setting up a connection.
 
   Such tests rely on `Phoenix.ConnTest` and also
-  import other functionality to make it easier
+  imports other functionality to make it easier
   to build and query models.
 
   Finally, if the test case interacts with the database,
@@ -20,15 +20,24 @@ defmodule Fibbage.ConnCase do
       # Import conveniences for testing with connections
       use Phoenix.ConnTest
 
-      import Fibbage.Router.Helpers
+      # Alias the data repository and import query/model functions
+      alias MultiChat.Repo
+      import Ecto.Model
+      import Ecto.Query, only: [from: 2]
+
+      # Import URL helpers from the router
+      import MultiChat.Router.Helpers
 
       # The default endpoint for testing
-      @endpoint Fibbage.Endpoint
+      @endpoint MultiChat.Endpoint
     end
   end
 
   setup tags do
+    unless tags[:async] do
+      Ecto.Adapters.SQL.restart_test_transaction(MultiChat.Repo, [])
+    end
 
-    {:ok, conn: Phoenix.ConnTest.build_conn()}
+    :ok
   end
 end

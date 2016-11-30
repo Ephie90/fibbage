@@ -1,3 +1,3 @@
-defmodule Fibbage.LayoutView do
-  use Fibbage.Web, :view
+defmodule MultiChat.LayoutView do
+  use MultiChat.Web, :view
 end
